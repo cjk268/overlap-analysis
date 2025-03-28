@@ -10,9 +10,6 @@ COPY selects $WORKDIR_PATH/selects
 COPY overlap-analysis.sh $WORKDIR_PATH/overlap-analysis.sh
 RUN chmod +x $WORKDIR_PATH/overlap-analysis.sh
 
-# Cleaning file names by removing leading **'s
-RUN cd "$WORKDIR_PATH/selects" && rename 's/\*\*//' MC/*
-
 RUN ./overlap-analysis.sh $(find "$WORKDIR_PATH/selects" -mindepth 1 -maxdepth 1 -type d)
 
 CMD cat overlap.csv
