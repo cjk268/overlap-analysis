@@ -6,6 +6,7 @@ if [ $# -lt 2 ]; then
     exit 1
 fi
 
+# Setting headers
 echo "count,filename,initials" > overlap.csv
 
 for directory in "$@" 
@@ -23,6 +24,7 @@ do
     ls "$directory" | sed "s|^|$(basename "$directory") |" >> tmp.txt
 done
 
+# Inspo from https://stackoverflow.com/questions/27986425/using-awk-to-count-the-number-of-occurrences-of-a-word-in-a-column
 sort tmp.txt | awk '
 {
     count[$2]++; 
